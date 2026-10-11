@@ -28,6 +28,16 @@
   :root[data-look="light"] h1 span{color:var(--ink)}
   :root[data-look="light"] .logo{height:clamp(155px,8.5vw,175px)}
   :root[data-look="light"] .clock small, :root[data-look="light"] .pace .row{color:var(--muted)}
+
+  .spark{display:block;width:100%;height:clamp(20px,1.5vw,30px);overflow:visible;margin-top:1px}
+  .spark .ln{fill:none;stroke:var(--accent);stroke-width:2.5;stroke-linejoin:round;stroke-linecap:round;vector-effect:non-scaling-stroke}
+  .spark .goal-ln{stroke:var(--dim);stroke-width:1.5;stroke-dasharray:4 4;opacity:.8;vector-effect:non-scaling-stroke}
+  .spark .proj{fill:none;stroke:var(--accent);stroke-width:2;stroke-dasharray:3 4;vector-effect:non-scaling-stroke}
+  .spark .hit{fill:transparent}
+  .sparklbl{display:flex;justify-content:space-between;font-size:clamp(10px,.62vw,12px);color:var(--muted);line-height:1;margin-top:6px}
+  .sparkwrap{position:relative}
+  .sparkwrap .pt{position:absolute;width:9px;height:9px;border-radius:50%;background:var(--accent);transform:translate(-50%,-50%)}
+  .sparkwrap .pt.hollow{background:var(--panel);border:2px solid var(--accent);width:10px;height:10px;box-sizing:border-box}
   [hidden]{display:none!important}
   html,body{height:100%}
   body{background:var(--bg);color:var(--ink);font-family:var(--body);margin:0;
@@ -55,11 +65,11 @@
   .board > *{min-width:0}
   .board h2.band2{margin-top:clamp(2px,.3vw,6px)}
   .board .tile{padding:clamp(8px,.75vw,14px) clamp(10px,.9vw,16px);gap:3px}
-  .board .val{font-size:clamp(30px,2.8vw,54px)}
+  .board .val{font-size:clamp(28px,2.5vw,48px)}
   .board .label{font-size:clamp(12px,.95vw,18px)}
   .vrow{display:flex;justify-content:space-between;align-items:flex-end;gap:8px;margin-top:auto;flex-wrap:wrap}
   .vrow .val{margin-top:0}
-  .vrow .chip{margin-bottom:.35em}
+  .vrow .chip{margin-bottom:.35em;margin-left:auto}
   .board .goal{font-size:clamp(11px,.85vw,15px)}
   .goal span:first-child{white-space:nowrap}
   .goal span:last-child{text-align:right}
@@ -105,6 +115,15 @@
   .fsbtn:hover,.fsbtn:focus-visible{color:var(--ink);border-color:var(--muted);outline:none}
   @media (max-width:1100px){.board{display:flex;flex-direction:column}.board .tile{flex:none}.board h2.band2{margin-top:12px}}
   @media (prefers-reduced-motion:no-preference){.prog i,.bar i{transition:width .8s ease}}
+  .splitchip{display:flex;justify-content:flex-end}
+  .splitrows{display:flex;flex-direction:column;gap:3px;margin-top:auto}
+  .srow{display:flex;align-items:baseline;gap:8px;border-top:1px solid var(--line);padding-top:3px}
+  .srow .nm{font-size:clamp(12px,.95vw,17px);color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .srow .nm::before{content:"";display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px;background:var(--line);vertical-align:0}
+  .srow[data-s="good"] .nm::before{background:var(--good)} .srow[data-s="warn"] .nm::before{background:var(--warn)} .srow[data-s="bad"] .nm::before{background:var(--bad)}
+  .srow .sv{font-family:var(--display);font-weight:900;font-size:clamp(17px,1.5vw,29px);line-height:1;font-variant-numeric:tabular-nums;text-align:right}
+  .srow .sv small{font-size:.5em;font-weight:600;color:var(--dim);margin-left:.15em}
+  .srow .sg{flex:1;font-size:clamp(10px,.72vw,13px);color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 </style>
 
 <div class="wrap">
@@ -143,9 +162,7 @@
 </div>
 
 <!-- BOARD DATA: replaced every weekday morning by the scheduled task. Keep the markers. -->
-<script id="board-data" type="application/json">
-{"month": "October 2026", "asOf": "2026-10-10", "updatedAt": "2026-10-10T15:00:00Z", "dayOfMonth": 10, "daysInMonth": 31, "sections": [{"title": "Sales pipeline", "col": 1, "band": 1, "kpis": [{"id": "leads", "label": "New leads this month", "value": 5, "goal": 40, "unit": "count", "direction": "up", "cumulative": true, "note": "Includes 3 not yet in RMS"}, {"id": "booked", "label": "Jobs booked this month", "value": 1, "goal": 27, "unit": "count", "direction": "up", "cumulative": true}, {"id": "bookrate", "label": "Booking rate \u00b7 90 days", "value": 38.1, "goal": 70, "unit": "pct", "direction": "up", "note": "24 of 63 potential jobs"}]}, {"title": "Response & estimates", "col": 2, "band": 1, "kpis": [{"id": "inspecthrs", "label": "Time to inspect site", "value": 45.6, "decimals": 1, "unit": "hours", "hit": false, "goalText": "PD goal: missed", "note": "58 claims"}, {"id": "estdays", "label": "Time to upload estimate", "value": 8.3, "decimals": 1, "avg": true, "unit": "days", "hit": false, "goalText": "PD goal: missed", "note": "58 claims"}, {"id": "noest", "label": "Jobs 5+ days old without an estimate", "value": 21, "goal": 0, "unit": "count", "direction": "down", "warnAt": 3, "note": "Includes jobs under 5 days old"}]}, {"title": "Job paperwork", "col": 3, "band": 1, "kpis": [{"id": "noauth", "label": "Started without signed work auth", "value": 1, "goal": 0, "unit": "count", "direction": "down", "warnAt": 0, "note": "Open jobs"}, {"id": "nococ", "label": "Completed, missing signed COC", "value": 5, "goal": 0, "unit": "count", "direction": "down", "warnAt": 2, "note": "Open jobs"}, {"id": "overbudget", "label": "Jobs over budget", "value": 4, "goal": 0, "unit": "count", "direction": "down", "warnAt": 2, "note": "Open jobs"}]}, {"title": "Job quality", "col": 4, "band": 1, "kpis": [{"id": "ajsmit", "label": "Average mitigation job", "value": 3193, "goal": 3500, "unit": "usd", "direction": "up", "note": "4 service calls left out"}, {"id": "ajsrecon", "label": "Average reconstruction job", "value": 9417, "goal": 35000, "unit": "usd", "direction": "up", "note": "Recently closed \u00b7 no $0 jobs"}, {"id": "ajsmold", "label": "Average mold job", "value": 1318, "goal": 1500, "unit": "usd", "direction": "up", "note": "Sep \u00b7 4 closed jobs"}]}, {"title": "Project speed", "col": 5, "band": 1, "kpis": [{"id": "mitdays", "label": "Mitigation cycle time", "value": 50, "goal": 30, "unit": "days", "direction": "down", "note": "Year to date"}, {"id": "recondays", "label": "Reconstruction cycle time", "value": 99, "goal": 60, "unit": "days", "direction": "down", "note": "Year to date"}, {"id": "molddays", "label": "Mold cycle time", "value": 14, "goal": 14, "unit": "days", "direction": "down", "note": "Year to date"}]}, {"title": "Job progress notes", "col": 1, "band": 2, "kpis": [{"id": "nointeract", "label": "Jobs lacking interaction (no note 5+ days)", "value": 11, "goal": 5, "unit": "pct", "direction": "down", "note": "5 of all 45 open jobs"}]}, {"title": "Service calls", "col": 2, "band": 2, "kpis": [{"id": "svccalls", "label": "Mit jobs that were service call only", "value": 32, "goal": 20, "unit": "pct", "direction": "down", "note": "YTD \u00b7 19 of 59 mit jobs"}]}, {"title": "Customer satisfaction & compliance", "col": 3, "band": 2, "span": 3, "kpis": [{"id": "scorecard", "label": "PDR Scorecard", "value": 66.5, "goal": 75, "unit": "pct", "direction": "up", "note": "131 of 197 checks hit", "decimals": 1}, {"id": "nps", "label": "Net Promoter Score (NPS)", "value": 91, "goal": 90, "unit": "count", "direction": "up", "note": "All 23 surveys"}, {"id": "reviews", "label": "Google reviews", "value": 5.0, "goal": 4.8, "unit": "rating", "direction": "up", "note": "1 new in 30 days"}]}], "headline": {"id": "win", "type": "text", "label": "Win of the day", "value": "We're beating the Paul Davis goal for contacting customers, under an hour on average. Keep it up, team!"}}
-</script>
+<script id="board-data" type="application/json">{"month": "October 2026", "asOf": "2026-10-10", "updatedAt": "2026-10-10T15:00:00Z", "dayOfMonth": 10, "daysInMonth": 31, "sections": [{"title": "Sales pipeline", "col": 1, "band": 1, "kpis": [{"id": "leads", "label": "New leads this month", "value": 5, "goal": 40, "unit": "count", "direction": "up", "cumulative": true, "note": "Includes 3 not yet in RMS", "trend": {"labels": ["Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct"], "values": [9, 13, 13, 8, 12, 39, 23, 23], "unit": "count", "source": "Paul Davis Leads by Month", "current": 5, "proj": 16}}, {"id": "booked", "label": "Jobs booked this month", "value": 2, "goal": 27, "unit": "count", "direction": "up", "cumulative": true, "trend": {"labels": ["Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct"], "values": [5, 13, 12, 13, 17, 23, 7, 16], "unit": "count", "source": "Paul Davis Total Jobs Booked by Month", "current": 2, "proj": 6}}, {"id": "bookrate", "label": "Booking rate · 90 days", "value": 38.5, "goal": 70, "unit": "pct", "direction": "up", "note": "25 of 65 potential jobs", "trend": {"labels": ["Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct"], "values": [45.5, 72.2, 63.2, 86.7, 77.3, 48.9, 25.9, 53.3], "current": 25.0, "unit": "pct", "source": "Paul Davis Conversion Rate by Month (each month on its own)"}}]}, {"title": "Response & estimates", "col": 2, "band": 1, "kpis": [{"id": "inspecthrs", "type": "split", "label": "Time to inspect", "parts": [{"name": "Mitigation", "value": 15.2, "goal": 4, "unit": "hours", "decimals": 1, "note": "12 jobs"}, {"name": "Reconstruction", "value": 110.5, "goal": 48, "unit": "hours", "decimals": 1, "note": "16 jobs"}]}, {"id": "estdays", "type": "split", "label": "Time to estimate", "parts": [{"name": "Mitigation", "value": 16.5, "goal": 5, "unit": "days", "decimals": 1, "note": "6 jobs"}, {"name": "Reconstruction", "value": 9.3, "goal": 5, "unit": "days", "decimals": 1, "note": "10 jobs"}]}, {"id": "noest", "label": "5+ days without an estimate", "value": 21, "goal": 0, "unit": "count", "direction": "down", "warnAt": 3, "note": "Includes jobs under 5 days old"}]}, {"title": "Job paperwork & notes", "col": 3, "band": 1, "kpis": [{"id": "noauth", "label": "Started without signed work auth", "value": 1, "goal": 0, "unit": "count", "direction": "down", "warnAt": 0, "note": "Open jobs"}, {"id": "nocos", "type": "split", "label": "Missing signed COS", "parts": [{"name": "Mitigation", "value": 3, "goal": 0, "unit": "count", "warnAt": 1, "note": "open jobs"}, {"name": "Reconstruction", "value": 2, "goal": 0, "unit": "count", "warnAt": 1, "note": "open jobs"}]}, {"id": "nointeract", "label": "No job note in 5+ days", "value": 11, "goal": 5, "unit": "pct", "direction": "down", "note": "5 of all 45 open jobs"}]}, {"title": "Job quality", "col": 4, "band": 1, "kpis": [{"id": "ajsmit", "label": "Average mitigation job", "value": 5227, "goal": 3500, "unit": "usd", "direction": "up", "note": "10 jobs · 4 svc calls out", "trend": {"labels": ["Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct"], "values": [null, 2142, 495, 3854, 6145, 1553, 3512, 1531], "current": 3803, "unit": "usd", "showGoal": true, "source": "Paul Davis Mitigation Closed AJS by Month (includes service calls)"}}, {"id": "ajsrecon", "label": "Average reconstruction job", "value": 13082, "goal": 35000, "unit": "usd", "direction": "up", "note": "16 approved & closed jobs"}, {"id": "ajsmold", "label": "Average mold job", "value": 1318, "goal": 1500, "unit": "usd", "direction": "up", "note": "Sep · 4 closed jobs"}]}, {"title": "Project speed", "col": 5, "band": 1, "kpis": [{"id": "mitdays", "label": "Mitigation cycle time", "value": 50, "goal": 30, "unit": "days", "direction": "down", "note": "Year to date"}, {"id": "recondays", "label": "Reconstruction cycle time", "value": 99, "goal": 60, "unit": "days", "direction": "down", "note": "Year to date"}, {"id": "molddays", "label": "Mold cycle time", "value": 14, "goal": 14, "unit": "days", "direction": "down", "note": "Year to date"}]}, {"title": "Service calls", "col": 1, "band": 2, "kpis": [{"id": "svccalls", "label": "Service-call-only mit jobs", "value": 32, "goal": 20, "unit": "pct", "direction": "down", "note": "YTD · 19 of 59"}]}, {"title": "Mit to recon", "col": 2, "band": 2, "kpis": [{"id": "mit2recon", "label": "Mit jobs that also signed for recon", "value": 39.2, "decimals": 0, "goal": 50, "unit": "pct", "direction": "up", "note": "YTD · 20 of 51"}]}, {"title": "Customer satisfaction & compliance", "col": 3, "band": 2, "span": 3, "kpis": [{"id": "scorecard", "label": "PDR Scorecard", "value": 66.5, "goal": 75, "unit": "pct", "direction": "up", "note": "131 of 197 checks hit", "decimals": 1}, {"id": "nps", "label": "Net Promoter Score (NPS)", "value": 91, "goal": 90, "unit": "count", "direction": "up", "note": "All 23 surveys"}, {"id": "reviews", "label": "Google reviews", "value": 5.0, "goal": 5, "unit": "rating", "direction": "up", "note": "1 new in 30 days"}]}], "headline": {"id": "win", "type": "text", "label": "Win of the day", "value": "We're beating the Paul Davis goal for contacting customers, under an hour on average. Keep it up, team!"}}</script>
 <!-- END BOARD DATA -->
 
 <script>
@@ -230,13 +247,68 @@
       case 'usd': return pre + fmtUsd(g);
       case 'pct': return pre + fmtInt(g) + '%';
       case 'days': return pre + fmtInt(g) + ' days';
-      case 'rating': return 'Goal ' + g.toFixed(1) + '★ or better';
+      case 'rating': return 'Goal ' + (Number.isInteger(g) ? g : g.toFixed(1)) + '★';
       default: return pre + fmtInt(g);
     }
   }
 
   function el(tag, cls, html){ const e = document.createElement(tag); if(cls) e.className = cls; if(html != null) e.innerHTML = html; return e; }
   function esc(s){ return String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+
+
+  // Trend line (sparkline) of monthly history; replaces the progress bar when a tile has >= 5 points
+  function spark(k){
+    const tr=k.trend; const vals=tr.values.slice(); const labels=tr.labels.slice();
+    const cur = tr.current; const proj = (tr.proj!=null) ? tr.proj : null;
+    const all = vals.concat([cur]); const n = all.length;
+    const shown = proj!=null ? vals.concat([proj]) : all;
+    const nums = shown.filter(v=>v!=null).concat(k.goal!=null?[Number(k.goal)]:[]);
+    let mx=Math.max(...nums), mn=Math.min(0,...nums); if(mx<=mn) mx=mn+1; mx*=1.08;
+    const W=400,H=100,P=4, x=i=>P+i*(W-2*P)/(n-1), y=v=>H-6-((v-mn)/(mx-mn))*(H-12);
+    const fmt=v=>{ if(v==null) return '—'; const r=Number(v);
+      return tr.unit==='usd' ? '$'+Math.round(r).toLocaleString('en-US') : tr.unit==='pct' ? Math.round(r)+'%' : Math.round(r).toLocaleString('en-US'); };
+    let d='', pen=false;
+    for(let i=0;i<n-1;i++){ const v=vals[i]; if(v==null){pen=false;continue;} d+=(pen?'L':'M')+x(i).toFixed(1)+' '+y(v).toFixed(1); pen=true; }
+    const lastI=n-1, prevI=n-2, endV = proj!=null?proj:cur;
+    let svg=`<svg class="spark" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" role="img" aria-label="${esc(k.label)} by month">`;
+    if(k.goal!=null && tr.showGoal!==false) svg+=`<line class="goal-ln" x1="${P}" x2="${W-P}" y1="${y(Number(k.goal))}" y2="${y(Number(k.goal))}"/>`;
+    svg+=`<path class="ln" d="${d}"/>`;
+    if(vals[prevI]!=null && endV!=null) svg+=`<line class="${proj!=null?'proj':'ln'}" x1="${x(prevI)}" y1="${y(vals[prevI])}" x2="${x(lastI)}" y2="${y(endV)}"/>`;
+    for(let i=0;i<n;i++){ const isCur=i===lastI; const v=isCur?cur:vals[i];
+      const t = isCur ? (proj!=null ? `${labels[i]} so far: ${fmt(cur)} · on pace for about ${fmt(proj)}` : `${labels[i]} so far: ${fmt(cur)}`) : `${labels[i]}: ${fmt(v)}`;
+      svg+=`<rect class="hit" x="${x(i)-(W/n/2)}" y="0" width="${W/n}" height="${H}"><title>${esc(t)}</title></rect>`; }
+    svg+='</svg>';
+    const pct=(i,v)=>`left:${(x(i)/W*100).toFixed(2)}%;top:${(y(v)/H*100).toFixed(2)}%`;
+    let pts='';
+    // isolated points (gaps on both sides) get a dot so they aren't invisible
+    for(let i=0;i<n-1;i++){ const v=vals[i]; if(v==null) continue; const iso=(i===0||vals[i-1]==null)&&(i===n-2||vals[i+1]==null); if(iso||i===prevI) pts+=`<i class="pt" style="${pct(i,v)}"></i>`; }
+    if(endV!=null) pts+=`<i class="pt${proj!=null?' hollow':''}" style="${pct(lastI,endV)}"></i>`;
+    const lbl = `<div class="sparklbl"><span>${esc(labels[0])}</span><span>${esc(labels[prevI])} ${fmt(vals[prevI])}</span><span>${esc(labels[lastI])} ${proj!=null?'~'+fmt(proj):fmt(cur)}</span></div>`;
+    return el('div','sparkwrap', svg+pts+lbl);
+  }
+
+
+  // Split tile: one KPI broken out by division (e.g. time to inspect for mit / recon / mold)
+  function splitStatus(k){
+    const rank={good:0,warn:1,bad:2}; let worst='good', any=false;
+    for (const p of k.parts){ if (p.value==null || p.value==='') continue; any=true; const s=status(Object.assign({direction:'down'},p)).s; if (rank[s]>rank[worst]) worst=s; }
+    if (!any) return {s:'', chip:'Data pending'};
+    return {s:worst, chip: worst==='good'?'All at goal':worst==='warn'?'Close':'Needs attention'};
+  }
+  function splitRows(k){
+    const w = el('div','splitrows');
+    for (const p of k.parts){
+      const has = !(p.value==null || p.value==='');
+      const s = has ? status(Object.assign({direction:'down'},p)).s : '';
+      const r = el('div','srow'); if (s) r.dataset.s = s;
+      const u = p.unit==='hours' ? 'hrs' : p.unit==='days' ? 'days' : p.unit==='mins' ? 'min' : '';
+      const v = has ? Number(p.value).toFixed(p.decimals ?? (p.unit==='count' ? 0 : 1)) + (u ? `<small>${u}</small>` : '') : '—';
+      const g = p.unit==='count' ? `goal ${esc(p.goal)}` : `≤ ${esc(p.goal)} ${u}`;
+      r.innerHTML = `<span class="nm">${esc(p.name)}</span><span class="sg">${g}${p.note?' · '+esc(p.note):''}</span><span class="sv">${v}</span>`;
+      w.appendChild(r);
+    }
+    return w;
+  }
 
   function tile(k, pace){
     if (k.type === 'text'){
@@ -245,14 +317,22 @@
       t.appendChild(el('div','text', esc(k.value || 'Every job, every note, every customer.')));
       return t;
     }
-    const st = status(k, pace);
+    const isSplit = k.type === 'split' && Array.isArray(k.parts);
+    const st = isSplit ? splitStatus(k) : status(k, pace);
     const t = el('div','tile'); if (st.s) t.dataset.s = st.s;
+    if (isSplit){
+      t.appendChild(el('div','top', `<div class="label">${esc(k.label)}</div>`));
+      if (st.chip) t.appendChild(el('div','splitchip', `<span class="chip">${esc(st.chip)}</span>`));
+      t.appendChild(splitRows(k));
+    } else {
     t.appendChild(el('div','top', `<div class="label">${esc(k.label)}</div>`));
     t.appendChild(el('div','vrow', `<div class="val">${show(k)}</div>${st.chip?`<span class="chip">${esc(st.chip)}</span>`:''}`));
     const note = k.note ? esc(k.note) : '';
     t.appendChild(el('div','goal', `<span><b>${esc(showGoal(k))}</b></span><span>${note}</span>`));
     const bar = el('div','prog', `<i style="width:${Math.max(2, Math.min(100, (st.pct||0)*100)).toFixed(1)}%"></i>${k.cumulative && pace!=null ? `<u style="left:calc(${(pace*100).toFixed(1)}% - 1px)"></u>`:''}`);
-    if (typeof k.hit !== 'boolean') t.appendChild(bar);
+    const useTrend = k.trend && Array.isArray(k.trend.values) && (k.trend.values.length+1) >= 5;
+    if (useTrend) t.appendChild(spark(k)); else if (typeof k.hit !== 'boolean') t.appendChild(bar);
+    }
     return t;
   }
 
