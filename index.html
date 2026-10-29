@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,800;6..12,900&display=swap">
 <style>
   :root{
+    --vw:1vw;
     color-scheme: dark;
     /* Paul Davis 2026 Brand Standards: black + PD Gold primary, warm grays accent, Emergency Red accent only */
     --bg:#000000; --panel:#141210; --panel2:#1E1B18; --line:#2E2A26;
@@ -26,70 +27,70 @@
   :root[data-look="light"] .tile{box-shadow:0 1px 0 var(--line), 0 0 0 1px var(--line) inset}
   :root[data-look="light"] .win{background:var(--panel2)}
   :root[data-look="light"] h1 span{color:var(--ink)}
-  :root[data-look="light"] .logo{height:clamp(155px,8.5vw,175px)}
+  :root[data-look="light"] .logo{height:clamp(155px,calc(8.5*var(--vw)),175px)}
   :root[data-look="light"] .clock small, :root[data-look="light"] .pace .row{color:var(--muted)}
 
-  .spark{display:block;width:100%;height:clamp(20px,1.5vw,30px);overflow:visible;margin-top:1px}
+  .spark{display:block;width:100%;height:clamp(20px,calc(1.5*var(--vw)),30px);overflow:visible;margin-top:1px}
   .spark .ln{fill:none;stroke:var(--accent);stroke-width:2.5;stroke-linejoin:round;stroke-linecap:round;vector-effect:non-scaling-stroke}
   .spark .goal-ln{stroke:var(--dim);stroke-width:1.5;stroke-dasharray:4 4;opacity:.8;vector-effect:non-scaling-stroke}
   .spark .proj{fill:none;stroke:var(--accent);stroke-width:2;stroke-dasharray:3 4;vector-effect:non-scaling-stroke}
   .spark .hit{fill:transparent}
-  .sparklbl{display:flex;justify-content:space-between;font-size:clamp(10px,.62vw,12px);color:var(--muted);line-height:1;margin-top:6px}
+  .sparklbl{display:flex;justify-content:space-between;font-size:clamp(10px,calc(.62*var(--vw)),12px);color:var(--muted);line-height:1;margin-top:6px}
   .sparkwrap{position:relative}
   .sparkwrap .pt{position:absolute;width:9px;height:9px;border-radius:50%;background:var(--accent);transform:translate(-50%,-50%)}
   .sparkwrap .pt.hollow{background:var(--panel);border:2px solid var(--accent);width:10px;height:10px;box-sizing:border-box}
   [hidden]{display:none!important}
   html,body{height:100%}
   body{background:var(--bg);color:var(--ink);font-family:var(--body);margin:0;
-       padding-inline:clamp(16px,2vw,40px);padding-block:clamp(12px,1.6vw,28px);box-sizing:border-box}
-  .wrap{display:flex;flex-direction:column;gap:clamp(12px,1.4vw,24px);min-height:100%}
+       padding-inline:clamp(16px,calc(2*var(--vw)),40px);padding-block:clamp(12px,calc(1.6*var(--vw)),28px);box-sizing:border-box}
+  .wrap{display:flex;flex-direction:column;gap:clamp(12px,calc(1.4*var(--vw)),24px);min-height:100%}
   header{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px 32px}
-  .brand{display:flex;align-items:center;gap:clamp(16px,2vw,36px);flex-wrap:wrap}
-  .logo{height:clamp(74px,6.2vw,124px);width:auto;display:block}
-  .wordmark{font-family:var(--display);font-weight:900;color:var(--accent);font-size:clamp(22px,2vw,38px);letter-spacing:.02em;line-height:1}
+  .brand{display:flex;align-items:center;gap:clamp(16px,calc(2*var(--vw)),36px);flex-wrap:wrap}
+  .logo{height:clamp(74px,calc(6.2*var(--vw)),124px);width:auto;display:block}
+  .wordmark{font-family:var(--display);font-weight:900;color:var(--accent);font-size:clamp(22px,calc(2*var(--vw)),38px);letter-spacing:.02em;line-height:1}
   .wordmark small{display:block;font-weight:400;color:var(--muted);font-size:.45em;letter-spacing:.12em;margin-top:4px}
-  .eyebrow{font-size:clamp(11px,.85vw,15px);font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}
-  h1{font-family:var(--display);font-weight:800;font-size:clamp(30px,3.4vw,64px);line-height:1;margin:.1em 0 0;text-wrap:balance}
+  .eyebrow{font-size:clamp(11px,calc(.85*var(--vw)),15px);font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}
+  h1{font-family:var(--display);font-weight:800;font-size:clamp(30px,calc(3.4*var(--vw)),64px);line-height:1;margin:.1em 0 0;text-wrap:balance}
   h1 span{color:var(--gold-lt)}
-  .meta{display:flex;align-items:flex-end;gap:clamp(16px,2.4vw,48px);flex-wrap:wrap}
+  .meta{display:flex;align-items:flex-end;gap:clamp(16px,calc(2.4*var(--vw)),48px);flex-wrap:wrap}
   .pace{min-width:min(360px,100%)}
-  .pace .row{display:flex;justify-content:space-between;font-size:clamp(12px,.95vw,17px);color:var(--muted);margin-bottom:6px;gap:12px}
+  .pace .row{display:flex;justify-content:space-between;font-size:clamp(12px,calc(.95*var(--vw)),17px);color:var(--muted);margin-bottom:6px;gap:12px}
   .pace .row b{color:var(--ink);font-weight:600}
   .bar{position:relative;height:10px;border-radius:5px;background:var(--line);overflow:hidden}
   .bar i{position:absolute;inset:0 auto 0 0;background:var(--accent);border-radius:5px}
-  .clock{font-family:var(--display);font-weight:800;font-size:clamp(28px,2.8vw,54px);line-height:1;font-variant-numeric:tabular-nums}
-  .clock small{display:block;font-family:var(--body);font-weight:400;font-size:clamp(11px,.85vw,15px);color:var(--muted);text-align:right;margin-top:4px}
+  .clock{font-family:var(--display);font-weight:800;font-size:clamp(28px,calc(2.8*var(--vw)),54px);line-height:1;font-variant-numeric:tabular-nums}
+  .clock small{display:block;font-family:var(--body);font-weight:400;font-size:clamp(11px,calc(.85*var(--vw)),15px);color:var(--muted);text-align:right;margin-top:4px}
 
   .board{flex:1;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));
-         grid-template-rows:auto repeat(3,minmax(0,1fr)) auto minmax(0,1fr);gap:clamp(6px,.6vw,12px) clamp(10px,1.2vw,20px)}
+         grid-template-rows:auto repeat(3,minmax(0,1fr)) auto minmax(0,1fr);gap:clamp(6px,calc(.6*var(--vw)),12px) clamp(10px,calc(1.2*var(--vw)),20px)}
   .board > *{min-width:0}
-  .board h2.band2{margin-top:clamp(2px,.3vw,6px)}
-  .board .tile{padding:clamp(8px,.75vw,14px) clamp(10px,.9vw,16px);gap:3px}
-  .board .val{font-size:clamp(28px,2.5vw,48px)}
-  .board .label{font-size:clamp(12px,.95vw,18px)}
+  .board h2.band2{margin-top:clamp(2px,calc(.3*var(--vw)),6px)}
+  .board .tile{padding:clamp(8px,calc(.75*var(--vw)),14px) clamp(10px,calc(.9*var(--vw)),16px);gap:3px}
+  .board .val{font-size:clamp(28px,calc(2.5*var(--vw)),48px)}
+  .board .label{font-size:clamp(12px,calc(.95*var(--vw)),18px)}
   .vrow{display:flex;justify-content:space-between;align-items:flex-end;gap:8px;margin-top:auto;flex-wrap:wrap}
   .vrow .val{margin-top:0}
   .vrow .chip{margin-bottom:.35em;margin-left:auto}
-  .board .goal{font-size:clamp(11px,.85vw,15px)}
+  .board .goal{font-size:clamp(11px,calc(.85*var(--vw)),15px)}
   .goal span:first-child{white-space:nowrap}
   .goal span:last-child{text-align:right}
-  .board h2{margin:0;font-size:clamp(12px,1vw,18px);font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);
+  .board h2{margin:0;font-size:clamp(12px,calc(1*var(--vw)),18px);font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);
           padding-bottom:8px;border-bottom:2px solid var(--accent)}
-  .tile{flex:1;background:var(--panel);border-radius:10px;padding:clamp(12px,1.2vw,22px);display:flex;flex-direction:column;gap:8px;
+  .tile{flex:1;background:var(--panel);border-radius:10px;padding:clamp(12px,calc(1.2*var(--vw)),22px);display:flex;flex-direction:column;gap:8px;
         border-left:6px solid var(--line);min-height:0}
   .tile[data-s="good"]{border-left-color:var(--good)}
   .tile[data-s="warn"]{border-left-color:var(--warn)}
   .tile[data-s="bad"]{border-left-color:var(--bad)}
   .tile .top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
-  .tile .label{font-size:clamp(13px,1.1vw,21px);font-weight:500;line-height:1.2}
-  .chip{flex:none;font-size:clamp(10px,.75vw,13px);font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:4px 8px;border-radius:999px;
+  .tile .label{font-size:clamp(13px,calc(1.1*var(--vw)),21px);font-weight:500;line-height:1.2}
+  .chip{flex:none;font-size:clamp(10px,calc(.75*var(--vw)),13px);font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:4px 8px;border-radius:999px;
         background:var(--panel2);color:var(--muted);white-space:nowrap}
   .tile[data-s="good"] .chip{color:var(--good);background:color-mix(in srgb,var(--good) 16%,transparent)}
   .tile[data-s="warn"] .chip{color:var(--warn);background:color-mix(in srgb,var(--warn) 16%,transparent)}
   .tile[data-s="bad"] .chip{color:var(--bad);background:color-mix(in srgb,var(--bad) 16%,transparent)}
-  .val{font-family:var(--display);font-weight:900;font-size:clamp(40px,4.6vw,92px);line-height:.95;font-variant-numeric:tabular-nums;margin-top:auto}
+  .val{font-family:var(--display);font-weight:900;font-size:clamp(40px,calc(4.6*var(--vw)),92px);line-height:.95;font-variant-numeric:tabular-nums;margin-top:auto}
   .val small{font-size:.4em;font-weight:600;color:var(--dim);margin-left:.15em}
-  .goal{display:flex;justify-content:space-between;gap:8px;font-size:clamp(12px,.95vw,17px);color:var(--muted)}
+  .goal{display:flex;justify-content:space-between;gap:8px;font-size:clamp(12px,calc(.95*var(--vw)),17px);color:var(--muted)}
   .goal b{color:var(--ink);font-weight:600}
   .prog{position:relative;height:8px;border-radius:4px;background:var(--line)}
   .prog i{position:absolute;inset:0 auto 0 0;border-radius:4px;background:var(--muted);max-width:100%}
@@ -100,30 +101,38 @@
   .win{background:var(--panel2);border-left-color:var(--accent)}
   .headline{flex:1 1 300px;max-width:560px;align-self:center;background:var(--panel2);border-left:6px solid var(--accent);border-radius:10px;padding:10px 16px}
   .headline[data-s="bad"]{border-left-color:var(--bad)} .headline[data-s="warn"]{border-left-color:var(--warn)} .headline[data-s="good"]{border-left-color:var(--good)}
-  .headline .hl{font-size:clamp(11px,.8vw,14px);font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--accent)}
-  .headline .text{font-family:var(--display);font-weight:800;color:var(--gold-lt);font-size:clamp(16px,1.15vw,22px);line-height:1.2;margin-top:4px;text-wrap:balance}
+  .headline .hl{font-size:clamp(11px,calc(.8*var(--vw)),14px);font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--accent)}
+  .headline .text{font-family:var(--display);font-weight:800;color:var(--gold-lt);font-size:clamp(16px,calc(1.15*var(--vw)),22px);line-height:1.2;margin-top:4px;text-wrap:balance}
   .headline .text b{font-weight:900;color:var(--ink)}
   .headline.has-detail{cursor:pointer} .headline.has-detail:hover,.headline.has-detail:focus-visible{outline:none;box-shadow:0 0 0 2px var(--accent)}
-  .win .text{font-family:var(--display);font-weight:800;color:var(--gold-lt);font-size:clamp(18px,1.45vw,28px);line-height:1.15;margin-top:auto;text-wrap:balance}
-  footer{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px 24px;font-size:clamp(11px,.85vw,15px);color:var(--muted);border-top:1px solid var(--line);padding-top:10px}
-  .tagline{font-size:clamp(14px,1.2vw,22px);font-weight:600;color:var(--ink)}
+  .win .text{font-family:var(--display);font-weight:800;color:var(--gold-lt);font-size:clamp(18px,calc(1.45*var(--vw)),28px);line-height:1.15;margin-top:auto;text-wrap:balance}
+  footer{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px 24px;font-size:clamp(11px,calc(.85*var(--vw)),15px);color:var(--muted);border-top:1px solid var(--line);padding-top:10px}
+  .tagline{font-size:clamp(14px,calc(1.2*var(--vw)),22px);font-weight:600;color:var(--ink)}
   .tagline b{color:var(--accent);font-weight:600}
   footer .legend{display:flex;gap:18px;flex-wrap:wrap}
   footer .legend span::before{content:"";display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;background:var(--c);vertical-align:-1px}
-  .empty{flex:1;display:grid;place-items:center;text-align:center;color:var(--muted);font-size:clamp(16px,1.4vw,24px);padding:40px 0}
+  .empty{flex:1;display:grid;place-items:center;text-align:center;color:var(--muted);font-size:clamp(16px,calc(1.4*var(--vw)),24px);padding:40px 0}
   .fsbtn{font:inherit;color:var(--muted);background:none;border:1px solid var(--line);border-radius:6px;padding:4px 10px;cursor:pointer}
   .fsbtn:hover,.fsbtn:focus-visible{color:var(--ink);border-color:var(--muted);outline:none}
-  @media (max-width:1100px){.board{display:flex;flex-direction:column}.board .tile{flex:none}.board h2.band2{margin-top:12px}}
+  @media (max-width:1100px){:root:not(.tv) .board{display:flex;flex-direction:column}:root:not(.tv) .board .tile{flex:none}:root:not(.tv) .board h2.band2{margin-top:12px}}
   @media (prefers-reduced-motion:no-preference){.prog i,.bar i{transition:width .8s ease}}
   .splitchip{display:flex;justify-content:flex-end}
   .splitrows{display:flex;flex-direction:column;gap:3px;margin-top:auto}
   .srow{display:flex;align-items:baseline;gap:8px;border-top:1px solid var(--line);padding-top:3px}
-  .srow .nm{font-size:clamp(12px,.95vw,17px);color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .srow .nm{font-size:clamp(12px,calc(.95*var(--vw)),17px);color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .srow .nm::before{content:"";display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px;background:var(--line);vertical-align:0}
   .srow[data-s="good"] .nm::before{background:var(--good)} .srow[data-s="warn"] .nm::before{background:var(--warn)} .srow[data-s="bad"] .nm::before{background:var(--bad)}
-  .srow .sv{font-family:var(--display);font-weight:900;font-size:clamp(17px,1.5vw,29px);line-height:1;font-variant-numeric:tabular-nums;text-align:right}
+  .srow .sv{font-family:var(--display);font-weight:900;font-size:clamp(17px,calc(1.5*var(--vw)),29px);line-height:1;font-variant-numeric:tabular-nums;text-align:right}
   .srow .sv small{font-size:.5em;font-weight:600;color:var(--dim);margin-left:.15em}
-  .srow .sg{flex:1;font-size:clamp(10px,.72vw,13px);color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .srow .sg{flex:1;font-size:clamp(10px,calc(.72*var(--vw)),13px);color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  /* TV mode: lay the board out on a fixed 1920x1080 stage and scale it to fit any landscape screen
+     (TV browsers and streaming sticks often report 1280x720 or 960x540, which used to fall into the phone layout) */
+  :root.tv{--vw:19.2px;height:100%;overflow:hidden;background:var(--bg)}
+  :root.tv body{position:absolute;top:0;left:0;width:1920px;height:1080px;transform-origin:0 0;overflow:hidden}
+  :root.tv .wrap{height:100%}
+  :root.tv body{padding-block:12px}
+  :root.tv .wrap{gap:12px}
+  :root.tv .logo, :root.tv[data-look="light"] .logo{height:120px}
 </style>
 
 <div class="wrap">
@@ -162,16 +171,23 @@
 </div>
 
 <!-- BOARD DATA: replaced every weekday morning by the scheduled task. Keep the markers. -->
-<script id="board-data" type="application/json">{"month": "October 2026", "asOf": "2026-10-10", "updatedAt": "2026-10-10T15:00:00Z", "dayOfMonth": 10, "daysInMonth": 31, "sections": [{"title": "Sales pipeline", "col": 1, "band": 1, "kpis": [{"id": "leads", "label": "New leads this month", "value": 5, "goal": 40, "unit": "count", "direction": "up", "cumulative": true, "note": "Includes 3 not yet in RMS", "trend": {"labels": ["Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct"], "values": [9, 13, 13, 8, 12, 39, 23, 23], "unit": "count", "source": "Paul Davis Leads by Month", "current": 5, "proj": 16}}, {"id": "booked", "label": "Jobs booked this month", "value": 2, "goal": 27, "unit": "count", "direction": "up", "cumulative": true, "trend": {"labels": ["Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct"], "values": [5, 13, 12, 13, 17, 23, 7, 16], "unit": "count", "source": "Paul Davis Total Jobs Booked by Month", "current": 2, "proj": 6}}, {"id": "bookrate", "label": "Booking rate · 90 days", "value": 38.5, "goal": 70, "unit": "pct", "direction": "up", "note": "25 of 65 potential jobs", "trend": {"labels": ["Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct"], "values": [45.5, 72.2, 63.2, 86.7, 77.3, 48.9, 25.9, 53.3], "current": 25.0, "unit": "pct", "source": "Paul Davis Conversion Rate by Month (each month on its own)"}}]}, {"title": "Response & estimates", "col": 2, "band": 1, "kpis": [{"id": "inspecthrs", "type": "split", "label": "Time to inspect", "parts": [{"name": "Mitigation", "value": 15.2, "goal": 4, "unit": "hours", "decimals": 1, "note": "12 jobs"}, {"name": "Reconstruction", "value": 110.5, "goal": 48, "unit": "hours", "decimals": 1, "note": "16 jobs"}]}, {"id": "estdays", "type": "split", "label": "Time to estimate", "parts": [{"name": "Mitigation", "value": 16.5, "goal": 5, "unit": "days", "decimals": 1, "note": "6 jobs"}, {"name": "Reconstruction", "value": 9.3, "goal": 5, "unit": "days", "decimals": 1, "note": "10 jobs"}]}, {"id": "noest", "label": "5+ days without an estimate", "value": 21, "goal": 0, "unit": "count", "direction": "down", "warnAt": 3, "note": "Includes jobs under 5 days old"}]}, {"title": "Job paperwork & notes", "col": 3, "band": 1, "kpis": [{"id": "noauth", "label": "Started without signed work auth", "value": 1, "goal": 0, "unit": "count", "direction": "down", "warnAt": 0, "note": "Open jobs"}, {"id": "nocos", "type": "split", "label": "Missing signed COS", "parts": [{"name": "Mitigation", "value": 3, "goal": 0, "unit": "count", "warnAt": 1, "note": "open jobs"}, {"name": "Reconstruction", "value": 2, "goal": 0, "unit": "count", "warnAt": 1, "note": "open jobs"}]}, {"id": "nointeract", "label": "No job note in 5+ days", "value": 11, "goal": 5, "unit": "pct", "direction": "down", "note": "5 of all 45 open jobs"}]}, {"title": "Job quality", "col": 4, "band": 1, "kpis": [{"id": "ajsmit", "label": "Average mitigation job", "value": 5227, "goal": 3500, "unit": "usd", "direction": "up", "note": "10 jobs · 4 svc calls out", "trend": {"labels": ["Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct"], "values": [null, 2142, 495, 3854, 6145, 1553, 3512, 1531], "current": 3803, "unit": "usd", "showGoal": true, "source": "Paul Davis Mitigation Closed AJS by Month (includes service calls)"}}, {"id": "ajsrecon", "label": "Average reconstruction job", "value": 13082, "goal": 35000, "unit": "usd", "direction": "up", "note": "16 approved & closed jobs"}, {"id": "ajsmold", "label": "Average mold job", "value": 1318, "goal": 1500, "unit": "usd", "direction": "up", "note": "Sep · 4 closed jobs"}]}, {"title": "Project speed", "col": 5, "band": 1, "kpis": [{"id": "mitdays", "label": "Mitigation cycle time", "value": 50, "goal": 30, "unit": "days", "direction": "down", "note": "Year to date"}, {"id": "recondays", "label": "Reconstruction cycle time", "value": 99, "goal": 60, "unit": "days", "direction": "down", "note": "Year to date"}, {"id": "molddays", "label": "Mold cycle time", "value": 14, "goal": 14, "unit": "days", "direction": "down", "note": "Year to date"}]}, {"title": "Service calls", "col": 1, "band": 2, "kpis": [{"id": "svccalls", "label": "Service-call-only mit jobs", "value": 32, "goal": 20, "unit": "pct", "direction": "down", "note": "YTD · 19 of 59"}]}, {"title": "Mit to recon", "col": 2, "band": 2, "kpis": [{"id": "mit2recon", "label": "Mit jobs that also signed for recon", "value": 39.2, "decimals": 0, "goal": 50, "unit": "pct", "direction": "up", "note": "YTD · 20 of 51"}]}, {"title": "Customer satisfaction & compliance", "col": 3, "band": 2, "span": 3, "kpis": [{"id": "scorecard", "label": "PDR Scorecard", "value": 66.5, "goal": 75, "unit": "pct", "direction": "up", "note": "131 of 197 checks hit", "decimals": 1}, {"id": "nps", "label": "Net Promoter Score (NPS)", "value": 91, "goal": 90, "unit": "count", "direction": "up", "note": "All 23 surveys"}, {"id": "reviews", "label": "Google reviews", "value": 5.0, "goal": 5, "unit": "rating", "direction": "up", "note": "1 new in 30 days"}]}], "headline": {"id": "win", "type": "text", "label": "Win of the day", "value": "We're beating the Paul Davis goal for contacting customers, under an hour on average. Keep it up, team!"}}</script>
+<script id="board-data" type="application/json">{"month": "October 2026", "asOf": "2026-10-29", "updatedAt": "2026-10-29T10:05:00Z", "dayOfMonth": 29, "daysInMonth": 31, "headline": {"id": "win", "type": "text", "label": "Win of the day", "value": "Scorecard climbed to 63.4% and jobs without a recent note dropped to 16. Keep it rolling!"}, "sections": [{"title": "Sales pipeline", "col": 1, "band": 1, "kpis": [{"id": "leads", "label": "New leads this month", "value": 26, "goal": 40, "unit": "count", "direction": "up", "cumulative": true, "trend": {"labels": ["Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct"], "values": [9, 13, 13, 8, 12, 39, 23, 23], "current": 26, "proj": 28, "unit": "count", "source": "Paul Davis Leads by Month"}}, {"id": "booked", "label": "Jobs booked this month", "value": 14, "goal": 27, "unit": "count", "direction": "up", "cumulative": true, "trend": {"labels": ["Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct"], "values": [5, 13, 12, 13, 17, 23, 7, 18], "current": 14, "proj": 15, "unit": "count", "source": "Paul Davis Total Jobs Booked by Month"}}, {"id": "bookrate", "label": "Booking rate \u00b7 90 days", "value": 40.6, "goal": 70, "unit": "pct", "direction": "up", "note": "39 of 96 potential jobs", "trend": {"labels": ["Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct"], "values": [45.5, 72.2, 63.2, 86.7, 77.3, 48.9, 25.9, 60.0], "current": 35.9, "unit": "pct", "source": "Paul Davis Conversion Rate by Month (each month on its own)"}}]}, {"title": "Response & estimates", "col": 2, "band": 1, "kpis": [{"id": "inspecthrs", "type": "split", "label": "Time to inspect", "parts": [{"name": "Mitigation", "value": 15.2, "goal": 4, "unit": "hours", "decimals": 1, "note": "12 jobs"}, {"name": "Reconstruction", "value": 110.5, "goal": 48, "unit": "hours", "decimals": 1, "note": "16 jobs"}]}, {"id": "estdays", "type": "split", "label": "Time to estimate", "parts": [{"name": "Mitigation", "value": 16.5, "goal": 5, "unit": "days", "decimals": 1, "note": "6 jobs"}, {"name": "Reconstruction", "value": 9.3, "goal": 5, "unit": "days", "decimals": 1, "note": "10 jobs"}]}, {"id": "noest", "label": "5+ days without an estimate", "value": 31, "goal": 0, "unit": "count", "direction": "down", "warnAt": 3, "note": "Includes jobs under 5 days old"}]}, {"title": "Job paperwork & notes", "col": 3, "band": 1, "kpis": [{"id": "noauth", "label": "Started without signed work auth", "value": 4, "goal": 0, "unit": "count", "direction": "down", "warnAt": 0, "note": "Open jobs"}, {"id": "nocos", "type": "split", "label": "Missing signed COS", "parts": [{"name": "Mitigation", "value": 3, "goal": 0, "unit": "count", "warnAt": 1, "note": "open jobs"}, {"name": "Reconstruction", "value": 2, "goal": 0, "unit": "count", "warnAt": 1, "note": "open jobs"}]}, {"id": "nointeract", "label": "No job note in 5+ days", "value": 29, "goal": 5, "unit": "pct", "direction": "down", "note": "16 of all 56 open jobs"}]}, {"title": "Job quality", "col": 4, "band": 1, "kpis": [{"id": "ajsmit", "label": "Average mitigation job", "value": 9248, "goal": 3500, "unit": "usd", "direction": "up", "note": "11 jobs \u00b7 4 svc calls out", "trend": {"labels": ["Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct"], "values": [null, 2142, 495, 3854, 6145, 1553, 3512, 1838], "current": 10755, "unit": "usd", "showGoal": true, "source": "Paul Davis Mitigation Closed AJS by month; Aug, Sep corrected to leave out test jobs"}}, {"id": "ajsrecon", "label": "Average reconstruction job", "value": 13739, "goal": 35000, "unit": "usd", "direction": "up", "note": "15 recon jobs"}, {"id": "ajsmold", "label": "Average mold job", "value": 1318, "goal": 1500, "unit": "usd", "direction": "up", "note": "Sep \u00b7 4 closed jobs"}]}, {"title": "Project speed", "col": 5, "band": 1, "kpis": [{"id": "mitdays", "label": "Mitigation cycle time", "value": 50, "goal": 30, "unit": "days", "direction": "down", "note": "Year to date"}, {"id": "recondays", "label": "Reconstruction cycle time", "value": 95, "goal": 60, "unit": "days", "direction": "down", "note": "Year to date"}, {"id": "molddays", "label": "Mold cycle time", "value": 15, "goal": 14, "unit": "days", "direction": "down", "note": "Year to date"}]}, {"title": "Service calls", "col": 1, "band": 2, "kpis": [{"id": "svccalls", "label": "Service-call-only mit jobs", "value": 32, "goal": 20, "unit": "pct", "direction": "down", "note": "YTD \u00b7 19 of 60"}]}, {"title": "Mit to recon", "col": 2, "band": 2, "kpis": [{"id": "mit2recon", "label": "Mit jobs that also signed for recon", "value": 39.2, "decimals": 0, "goal": 50, "unit": "pct", "direction": "up", "note": "YTD \u00b7 20 of 51"}]}, {"title": "Customer satisfaction & compliance", "col": 3, "band": 2, "span": 3, "kpis": [{"id": "scorecard", "label": "PDR Scorecard", "value": 63.4, "decimals": 1, "goal": 75, "unit": "pct", "direction": "up", "note": "144 of 227 checks hit"}, {"id": "nps", "label": "Net Promoter Score (NPS)", "value": 92, "goal": 90, "unit": "count", "direction": "up", "note": "All 25 surveys"}, {"id": "reviews", "label": "Google reviews", "value": 5.0, "goal": 5, "unit": "rating", "direction": "up", "note": "2 new in 30 days"}]}]}</script>
 <!-- END BOARD DATA -->
 
 <script>
 (function(){
   const $ = id => document.getElementById(id);
-  // 4K TVs: scale the 1080p layout up so text stays the same size on screen
+  // TVs: lay out at 1920x1080 and scale to fill the screen (up for 4K, down for 720p/540p TV browsers).
+  // Portrait screens (phones) keep the stacked layout.
   function fit(){
-    const z = Math.max(1, Math.min(window.innerWidth / 1920, window.innerHeight / 1080));
-    document.documentElement.style.zoom = z > 1.05 ? z : '';
+    const w = window.innerWidth, h = window.innerHeight, root = document.documentElement, b = document.body;
+    const tv = w > h && w >= 640;
+    root.classList.toggle('tv', tv);
+    if (!tv){ b.style.transform = ''; b.style.left = b.style.top = ''; return; }
+    const z = Math.min(w / 1920, h / 1080);
+    b.style.transform = `scale(${z})`;
+    b.style.left = ((w - 1920 * z) / 2) + 'px';
+    b.style.top = ((h - 1080 * z) / 2) + 'px';
   }
   fit(); window.addEventListener('resize', fit);
   const logo = $('logo');
